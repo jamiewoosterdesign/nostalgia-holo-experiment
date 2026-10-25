@@ -15,7 +15,7 @@ const WINDOWS = {
   selective: { x: 54, y: 54, w: 916, h: 1040, foil: 0 },
   refractor: { x: 50, y: 50, w: 924, h: 1060, foil: 200 },
   comic: { x: 0, y: 332, w: 1024, h: 1228, foil: 0 },
-  blister: { x: 90, y: 300, w: 844, h: 760, foil: 255 },
+  blister: { x: 90, y: 300, w: 844, h: 760, foil: 70 },
   packet: { x: 90, y: 700, w: 844, h: 480, foil: -1 },
 };
 
@@ -47,14 +47,14 @@ function cover(ctx, img, x, y, w, h) {
 export async function applyOverride(id, art) {
   const win = WINDOWS[id];
   if (!win) return;
-  const img = await loadImage(`${import.meta.env.BASE_URL}art/${id}.png`);
+  const img = await loadImage(`/art/${id}.png`);
   if (!img) return;
   const a = art.map.getContext('2d');
   cover(a, img, win.x, win.y, win.w, win.h);
   art.replaced = true;
   if (art.mask) {
     const m = art.mask.getContext('2d');
-    const foil = await loadImage(`${import.meta.env.BASE_URL}art/${id}-foil.png`);
+    const foil = await loadImage(`/art/${id}-foil.png`);
     if (foil) {
       // Put the greyscale foil mask into the red channel.
       const tmp = new OffscreenCanvas(win.w, win.h);
@@ -68,7 +68,7 @@ export async function applyOverride(id, art) {
       }
       m.putImageData(out, win.x, win.y);
     } else if (win.foil >= 0) {
-      m.fillStyle = `rgb(${win.foil},${id === 'blister' ? 255 : 0},0)`;
+      m.fillStyle = `rgb(${win.foil},${id === 'blister' ? 60 : 0},0)`;
       m.fillRect(win.x, win.y, win.w, win.h);
     }
   }

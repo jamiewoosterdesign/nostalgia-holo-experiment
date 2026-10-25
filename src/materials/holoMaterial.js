@@ -13,9 +13,7 @@ import * as THREE from 'three';
 // ---------------------------------------------------------------------------
 
 // Uniforms shared by every holo material (time, key light direction in view space…).
-const GLINT_DIRS = Array.from({ length: 6 }, () => new THREE.Vector3(0, 0, 1));
 export const holoGlobals = {
-  uGlintDirs: { value: GLINT_DIRS },
   uTime: { value: 0 },
   uKeyDirView: { value: new THREE.Vector3(0.3, 0.6, 0.7).normalize() },
   uTorchView: { value: new THREE.Vector3(0, 0, 1) },
@@ -28,7 +26,6 @@ const PARS = /* glsl */ `
 varying vec2 vHoloUv;
 uniform float uTime;
 uniform vec3 uKeyDirView;
-uniform vec3 uGlintDirs[6];
 uniform vec3 uTorchView;
 uniform float uTorchOn;
 
@@ -104,7 +101,7 @@ vec4 hVoronoi(vec2 x){
 
 vec3 hPalette(float t){
   // Cyan / magenta / gold biased — closer to real holographic film than pure HSV.
-  return clamp(0.5 + 0.55 * cos(6.28318 * (t + vec3(0.0, 0.33, 0.67))), 0.0, 1.0);
+  return 0.56 + 0.44 * cos(6.28318 * (t + vec3(0.0, 0.31, 0.62)));
 }
 
 mat3 hTangentFrame(vec3 N, vec3 p, vec2 uv){
@@ -218,14 +215,10 @@ const FRAG_MAIN = /* glsl */ `
     hue += cellRand * spark * 0.9;
     // Explicit glints toward the key light and the torch for crisp twinkle.
     vec3 Rv = reflect(-V, flakeN);
-    float g1 = pow(max(dot(Rv, uKeyDirView), 0.0), 400.0);
-    for (int gi = 0; gi < 6; gi++) g1 += pow(max(dot(Rv, uGlintDirs[gi]), 0.0), 300.0);
-    float g2 = pow(max(dot(Rv, normalize(uTorchView)), 0.0), 220.0) * uTorchOn;
-    // only flakes in the sparkle lottery flash: keeps glints sparse and crisp
-    float lottery = step(0.55, hHash12(sv.zw + 3.1));
-    float glint = (g1 + g2 * 1.5) * spark * flakeEdge * uGlint * lottery;
+    float g1 = pow(max(dot(Rv, uKeyDirView), 0.0), 900.0);
+    float g2 = pow(max(dot(Rv, normalize(uTorchView)), 0.0), 500.0) * uTorchOn;
+    float glint = (g1 + g2 * 1.4) * spark * flakeEdge * uGlint;
     totalEmissiveRadiance += mix(vec3(1.0), hPalette(hue), 0.55) * glint;
-    totalEmissiveRadiance += hPalette(hue) * spark * flakeEdge * 0.22;
   #endif
 
   vec3 rainbow = hPalette(hue);
@@ -233,7 +226,7 @@ const FRAG_MAIN = /* glsl */ `
   rainbow = mix(vec3(lum), rainbow, uSat);
   // Fresnel: grazing angles wash toward silver like real metallised film.
   float fres = pow(1.0 - clamp(dot(V, N0), 0.0, 1.0), 3.0);
-  vec3 foilMetal = mix(rainbow, vec3(0.95), fres * 0.35);
+  vec3 foilMetal = mix(rainbow, vec3(0.95), fres * 0.6);
   vec3 foilColor = foilMetal * mix(vec3(1.0), clamp(artColor * 1.35, 0.0, 1.0), uInkOver);
 
   float metalAmt = clamp(max(max(foil, spark), ink), 0.0, 1.0);
@@ -298,21 +291,21 @@ export function createHoloMaterial(opts = {}) {
   const uniforms = {
     uMask: { value: h.mask || null },
     uPrism: { value: h.prism ?? 0 },
-    uPrismRough: { value: h.prismRough ?? 0.1 },
-    uSat: { value: h.saturation ?? 1.0 },
+    uPrismRough: { value: h.prismRough ?? 0.22 },
+    uSat: { value: h.saturation ?? 0.9 },
     uHueShift: { value: h.hueShift ?? 0 },
     uTiltGain: { value: new THREE.Vector2(...(h.tiltGain || [1.6, 0.9])) },
     uPatternScale: { value: h.patternScale ?? 40 },
     uPatternAngle: { value: h.patternAngle ?? 0.6 },
     uPatternMix: { value: h.patternMix ?? 1 },
     uInkOver: { value: h.inkOver ?? 0 },
-    uGlow: { value: (h.glow ?? 0.06) * 0.25 },
-    uMetalInkRough: { value: h.metalInkRough ?? 0.16 },
+    uGlow: { value: h.glow ?? 0.06 },
+    uMetalInkRough: { value: h.metalInkRough ?? 0.28 },
     uAspect: { value: h.aspect ?? 0.72 },
     uSparkle: { value: h.sparkle ?? 0 },
     uSparkleScale: { value: h.sparkleScale ?? 160 },
     uSparkleTilt: { value: h.sparkleTilt ?? 1.2 },
-    uSparkleRough: { value: h.sparkleRough ?? 0.05 },
+    uSparkleRough: { value: h.sparkleRough ?? 0.08 },
     uGlint: { value: h.glint ?? 6 },
     uHeight: { value: h.height || null },
     uHeightTexel: { value: new THREE.Vector2(1 / 1024, 1 / 1024) },

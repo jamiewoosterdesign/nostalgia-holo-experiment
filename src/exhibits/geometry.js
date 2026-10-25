@@ -54,49 +54,53 @@ export function cardGeometry(w, h, radius, thickness, holes = []) {
   return geo;
 }
 
-// Pillow-shaped foil packet with crimped ends and baked-in crinkles.
+// Foil wax-pack wrapper: a gently filled pillow (12 flat cards inside, not
+// air), crimped ends, a few soft folds rather than crumples.
 // side = +1 front face, -1 back face. Both meet at z = 0 around the edge.
-export function packetGeometry(w, h, side = 1, seed = 4) {
-  const segX = 120, segY = 190;
-  const geo = new THREE.PlaneGeometry(w, h, segX, segY);
+// v0..v1 lets you build just a slice (used for the tear-off top crimp); the
+// slice keeps the same UVs and shape as the full packet.
+export function packetGeometry(w, h, side = 1, seed = 4, { v0 = 0, v1 = 1, puff = 0.006, folds = 1 } = {}) {
+  const segX = 90;
+  const segY = Math.max(4, Math.round(170 * (v1 - v0)));
+  const sh = h * (v1 - v0);
+  const geo = new THREE.PlaneGeometry(w, sh, segX, segY);
+  geo.translate(0, -h / 2 + h * v0 + sh / 2, 0);
   const pos = geo.attributes.position;
   const uv = geo.attributes.uv;
   const r = rng(seed);
-  // Random crease lines: each crease is a line with a sharp ridge profile.
   const creases = [];
-  for (let i = 0; i < 34; i++) {
-    const a = r() * Math.PI;
+  for (let i = 0; i < 7; i++) {
+    const ang = Math.PI / 2 + (r() - 0.5) * 0.6; // mostly horizontal soft folds
     creases.push({
-      nx: Math.cos(a), ny: Math.sin(a),
-      d: (r() - 0.5) * (w + h) * 0.6,
-      amp: (0.0012 + r() * 0.0035) * (r() < 0.5 ? -1 : 1),
-      width: 0.006 + r() * 0.02,
+      nx: Math.cos(ang), ny: Math.sin(ang),
+      d: (r() - 0.5) * h * 0.8,
+      amp: (0.0004 + r() * 0.0008) * (r() < 0.5 ? -1 : 1) * folds,
+      width: 0.03 + r() * 0.05,
     });
   }
-  const crimp = 0.075; // fraction of height at each end
+  const crimp = 0.075;
   for (let i = 0; i < pos.count; i++) {
     const x = pos.getX(i), y = pos.getY(i);
     const u = x / w + 0.5, v = y / h + 0.5;
-    const ex = Math.sin(Math.PI * Math.min(1, Math.max(0, u)));
+    uv.setXY(i, u, v);
+    // flat-topped pillow: cards inside keep the middle flat, edges roll off
+    const ex = Math.min(1, Math.sin(Math.PI * Math.min(1, Math.max(0, u))) * 2.2);
     const inBody = v > crimp && v < 1 - crimp;
     const vb = Math.min(1, Math.max(0, (v - crimp) / (1 - 2 * crimp)));
-    const ey = inBody ? Math.sin(Math.PI * vb) : 0;
-    let z = Math.pow(ex, 0.45) * Math.pow(ey, 0.35) * 0.028;
-    // crinkles fade toward the seams
+    const ey = inBody ? Math.min(1, Math.sin(Math.PI * vb) * 2.4) : 0;
+    let z = Math.pow(ex, 1.2) * Math.pow(ey, 1.2) * puff;
     let cr = 0;
     for (const c of creases) {
       const dist = x * c.nx + y * c.ny - c.d;
-      cr += c.amp * Math.max(0, 1 - Math.abs(dist) / c.width);
+      const t = Math.max(0, 1 - Math.abs(dist) / c.width);
+      cr += c.amp * t * t * (3 - 2 * t); // smooth, not ridged
     }
-    z += cr * Math.pow(ex * (inBody ? ey : 0.2), 0.5);
-    // crimp ridges
-    if (!inBody) z += Math.abs(Math.sin(x * 260)) * 0.0012 - 0.0006;
-    // fin seam along the edges
+    z += cr * ex * (inBody ? ey : 0);
+    if (!inBody) z += Math.abs(Math.sin(x * 260)) * 0.0006 - 0.0003; // crimp ridges
     pos.setZ(i, z * side);
-    if (side < 0) uv.setX(i, 1 - uv.getX(i));
+    if (side < 0) uv.setX(i, 1 - u);
   }
   if (side < 0) {
-    // flip winding so the back faces outward
     const idx = geo.index.array;
     for (let i = 0; i < idx.length; i += 3) { const t = idx[i]; idx[i] = idx[i + 1]; idx[i + 1] = t; }
   }

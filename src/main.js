@@ -6,12 +6,14 @@ import { BokehPass } from 'three/examples/jsm/postprocessing/BokehPass.js';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 
 import { OffAxisCamera } from './render/offAxisCamera.js';
-import { buildEnvironment, buildFoilEnvironment } from './render/environment.js';
+import { buildEnvironment } from './render/environment.js';
 import { FloorMirror } from './render/mirror.js';
 import { holoGlobals } from './materials/holoMaterial.js';
-import { buildRoom, ROOM } from './gallery/room.js';
+import { foilLights } from './render/hyperspace.js';
+import { buildRoom, ROOM, loadPosters } from './gallery/room.js';
 import { ShipStudio } from './ships/studio.js';
 import { buildCatalog } from './exhibits/catalog.js';
+import { HeadTracker } from './tracking/headTracker.js';
 import { Viewer } from './tracking/viewer.js';
 import { UI } from './ui/ui.js';
 
@@ -32,11 +34,10 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('#eef0f7');
+scene.background = new THREE.Color('#07040d');
 const envMap = buildEnvironment(renderer);
 scene.environment = envMap;
-const foilEnv = buildFoilEnvironment(renderer);
-scene.environmentIntensity = 0.75;
+scene.environmentIntensity = 0.95;
 
 const camera = new OffAxisCamera();
 const aspect0 = () => window.innerWidth / window.innerHeight;
@@ -44,7 +45,7 @@ camera.aspect = aspect0();
 camera.setEye(0, 0.05, 2.8);
 
 // Lights: soft key from upper-front-left (window light), cool fill, warm bounce.
-const key = new THREE.DirectionalLight('#fff6ea', 3.0);
+const key = new THREE.DirectionalLight('#fff6ea', 2.4);
 key.position.set(-0.9, 1.6, 1.4);
 key.target.position.set(0, -0.3, -0.6);
 key.castShadow = true;
@@ -59,7 +60,7 @@ key.shadow.bias = -0.0004;
 key.shadow.normalBias = 0.01;
 key.shadow.radius = 6;
 scene.add(key, key.target);
-scene.add(new THREE.HemisphereLight('#f4f2ff', '#b8b0d0', 0.35));
+scene.add(new THREE.HemisphereLight('#f4f2ff', '#d8d2e8', 0.55));
 const torch = new THREE.PointLight('#ffffff', 0, 1.6, 1.6);
 scene.add(torch);
 
@@ -98,11 +99,11 @@ function layout() {
   const topBlister = room.makePlinth(0, backZ - 0.08, 0.2, 0.36, 0.12, '#ff7a2b', '04', 'Carded blister');
   const topComic = room.makePlinth(x(0.62), backZ, 0.17, 0.38, 0.1, '#2f7bff', '03', 'Embossed cover');
 
-  byId.refractor.setRest(new THREE.Vector3(x(-0.62), topRef + 0.15, backZ), 0.22);
+  byId.holoview.setRest(new THREE.Vector3(x(-0.62), topRef + 0.15, backZ), 0.22);
   byId.blister.setRest(new THREE.Vector3(0, topBlister + 0.215, backZ - 0.08), 0);
   byId.comic.setRest(new THREE.Vector3(x(0.62), topComic + 0.19, backZ), -0.22);
 
-  byId.selective.setRest(new THREE.Vector3(x(-0.55), -0.29, midZ), 0.35);
+  byId.dunk.setRest(new THREE.Vector3(x(-0.55), -0.29, midZ), 0.35);
   byId.packet.setRest(new THREE.Vector3(0, -0.31, midZ + 0.1), 0.0, 1, -0.1);
   byId.motion.setRest(new THREE.Vector3(x(0.55), -0.29, midZ), -0.35);
 
@@ -122,37 +123,24 @@ composer.addPass(new RenderPass(scene, camera));
 const bokeh = new BokehPass(scene, camera, { focus: 2.5, aperture: 0.0, maxblur: 0.008 });
 bokeh.enabled = false;
 composer.addPass(bokeh);
-const bloom = new UnrealBloomPass(new THREE.Vector2(size.x, size.y), 0.14, 0.2, 2.6);
+const bloom = new UnrealBloomPass(new THREE.Vector2(size.x, size.y), 0.35, 0.5, 1.6);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
-if (params.has('nobloom')) bloom.enabled = false;
+bloom.enabled = params.has('bloom');
 
 // ---------------------------------------------------------------------------
 // Tracking
 // ---------------------------------------------------------------------------
-// Lightweight stand-in until the MediaPipe tracker is loaded on demand.
-let tracker = { running: false, locked: null, update() {}, drawPreview() {}, stop() {}, hfovDeg: 62 };
-const IS_ARTIFACT = import.meta.env.VITE_ARTIFACT === '1';
+const tracker = new HeadTracker();
 const viewer = new Viewer(tracker);
+tracker.onStatus = (state, label) => ui.trackingStatus(state, label);
 ui.onToggleTracking = async () => {
   if (tracker.running) {
     tracker.stop();
     ui.trackingStatus('', 'Enable head tracking');
     return;
   }
-  if (IS_ARTIFACT) {
-    ui.trackingStatus('lost', 'Camera needs the local version — mouse mode');
-    return;
-  }
   try {
-    if (!tracker.start) {
-      const { HeadTracker } = await import('./tracking/headTracker.js');
-      const t = new HeadTracker();
-      t.hfovDeg = tracker.hfovDeg;
-      t.onStatus = (state, label) => ui.trackingStatus(state, label);
-      tracker = t;
-      viewer.tracker = t;
-    }
     await tracker.start();
   } catch (e) {
     console.error(e);
@@ -164,7 +152,7 @@ ui.onSettings = (s) => {
   viewer.applySmoothing();
   tracker.hfovDeg = s.camFov;
   mirror.enabled = s.reflect;
-  bloom.enabled = s.bloom && !params.has('nobloom');
+  bloom.enabled = s.bloom;
   dofAllowed = s.dof;
   ui.showPreview(s.preview);
 };
@@ -284,14 +272,18 @@ window.addEventListener('resize', onResize);
 // Boot
 // ---------------------------------------------------------------------------
 async function boot() {
-  try { await document.fonts.ready; } catch {}
+  try {
+    await Promise.all(['400 40px Bungee', '400 40px Anton'].map((f) => document.fonts.load(f)));
+    await document.fonts.ready;
+  } catch {}
   ui.progress(0.2, 'Building starships…');
   await new Promise((r) => setTimeout(r, 30));
-  const studio = new ShipStudio(renderer, foilEnv);
+  const studio = new ShipStudio(renderer, envMap);
   ui.progress(0.4, 'Printing foils…');
-  exhibits = await buildCatalog({ studio, foilEnv });
+  exhibits = await buildCatalog({ studio });
   exhibits.forEach((e) => exhibitLayer.add(e.root));
   ui.progress(0.75, 'Hanging the exhibits…');
+  await loadPosters();
   buildGallery();
   onResize();
   // Warm up shaders so the first frames don't hitch.
@@ -324,8 +316,6 @@ function adaptQuality(dt) {
   }
 }
 const keyDirWorld = new THREE.Vector3();
-const glintSpots = [[-1.2, 1.4, 2.5], [1.0, 1.2, 2.8], [0, 0.5, 3.2], [-0.4, 1.8, 0.6], [0.8, 1.6, -0.2], [-1.6, 0.2, 1.6]].map((p) => new THREE.Vector3(...p));
-const glintCentre = new THREE.Vector3(0, -0.1, -0.6);
 
 function frame() {
   const rawDt = clock.getDelta();
@@ -343,6 +333,7 @@ function frame() {
   }
   const eye = viewer.update(dt, t, camera.aspect);
   camera.setEye(eye.x, eye.y, eye.z);
+  foilLights.uEyeLight.value.set(eye.x, eye.y, eye.z);
 
   // Hover
   if (!drag) {
@@ -365,12 +356,11 @@ function frame() {
     torchPlane.constant = -(selected.root.position.z + 0.25);
     if (raycaster.ray.intersectPlane(torchPlane, tmpV)) torch.position.copy(tmpV);
   }
-  torch.intensity += ((inspecting ? 0.35 : 0) - torch.intensity) * (1 - Math.exp(-dt * 5));
+  torch.intensity += ((inspecting ? 0.9 : 0) - torch.intensity) * (1 - Math.exp(-dt * 5));
   holoGlobals.uTorchOn.value = torch.intensity;
 
   // Shader globals in view space
   holoGlobals.uTime.value = t;
-  glintSpots.forEach((p, i) => holoGlobals.uGlintDirs.value[i].copy(p).sub(glintCentre).normalize().transformDirection(camera.matrixWorldInverse));
   keyDirWorld.copy(key.position).sub(key.target.position).normalize();
   holoGlobals.uKeyDirView.value.copy(keyDirWorld).transformDirection(camera.matrixWorldInverse);
   holoGlobals.uTorchView.value.copy(torch.position).applyMatrix4(camera.matrixWorldInverse);

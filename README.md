@@ -41,24 +41,18 @@ The mouse stands in for your head until a face is found, and again whenever you 
 - **Floor mirror** (`src/render/mirror.js`). A planar reflection that stays correct under the skewed off-axis frustum, blurred by mip level.
 - **Ships** (`src/ships/`). Two original procedural models: an explorer cruiser and a battered freighter. The studio renders them into the card art and into the 16-frame motion-card atlas.
 
-## Swapping in generated art
+## Art and model slots
 
-Drop PNGs into `public/art/` and reload. See `src/art/overrides.js` for exactly where each one lands.
+Everything is built from images in `public/art/` (png, jpg or webp). Swap any of them for your own scans or photos, reload, and the print shop in `src/art/era.js` re-separates the foil automatically.
 
-| File | Where it goes | Aspect |
+| File | Exhibit | How the finish is derived |
 |---|---|---|
-| `selective.png` | Card 01 art window | ~0.88 : 1 portrait |
-| `selective-foil.png` | Optional greyscale mask: white = foil, black = matte | same |
-| `refractor.png` | Card 02 art window | ~0.87 : 1 |
-| `comic.png` | Comic cover, below the masthead | ~0.83 : 1 |
-| `blister.png` | Blister backing window | ~1.1 : 1 |
-| `packet.png` | Centre panel of the foil packet | ~1.75 : 1 landscape |
+| `dunk.png` | 01 Prism parallel card | Dark shadows in the photo go prismatic; gold name is embossed metallic ink |
+| `drive.png` | 02 Holoview insert | Transparent PNG or green screen: the figure prints matte over a full diamond-foil background |
+| `comic.png` | 03 Chromium comic | Whole cover over foil; highlights flare, sparkle in the hottest whites; bright saturated masthead is embossed metal |
+| `blister.png` | 04 Blister backing window | Cracked-ice foil under the art |
+| `flicker.png` | 05 Lenticular card | Three frames side by side; each is cropped to the lens window |
+| `pack.png` | 06 Wax pack wrapper | Metallised film everywhere except near-white areas (opaque white ink) |
+| `poster-1.png`, `poster-2.png` | Wall laser posters | Holographic film with transparent inks, sparkle in highlights |
 
-Suggested prompts. They are deliberately original, with the right era and no existing characters:
-
-1. **selective.png:** "1990s trading card illustration, a sleek white explorer starship with a large elliptical saucer and two long glowing blue engine nacelles, banking over a ringed coral-pink planet, deep indigo-to-magenta nebula, scattered bright stars, painterly airbrush style, dramatic lighting, no text, no border"
-2. **selective-foil.png:** "the same composition as a pure black-and-white mask: stars, nebula wisps and planet ring in white, the starship and planet body in solid black, no grey"
-3. **refractor.png:** "1990s chrome trading card art, an original cyborg sentinel head and shoulders with a glowing red visor slit, polished chrome plating, synthwave sun and neon grid behind, radial light rays, airbrushed, no text"
-4. **comic.png:** "early-90s comic book cover art, a battered round freighter spaceship with forward mandibles swooping past the camera through radiating speed lines, teal planet in the lower right, halftone dots, bold inks and flat colours, dynamic angle, no text or logo"
-5. **blister.png:** "toy packaging backdrop, blueprint grid on a bright blue-to-violet gradient with a soft white glow in the centre, 1990s action-figure card style, no text"
-6. **packet.png:** "abstract 1990s trading-card pack graphic, bold diagonal stripes of electric blue, violet, hot pink and orange with starbursts and lightning shapes, no text"
+Optional: drop a `public/models/toy.glb` and it replaces the procedural ship inside the blister pack (auto-centred and scaled).

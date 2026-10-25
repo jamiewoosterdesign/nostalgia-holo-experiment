@@ -168,3 +168,27 @@ body.dragging #stage { cursor: grabbing; }
   .hud-top { padding: 14px 16px; }
   #settings { right: 12px; left: 12px; width: auto; }
 }
+
+/* ---------- quiet HUD: small, dark glass, gets out of the way ---------- */
+.hud-top { padding: 14px 16px; }
+.wm-title { font-size: 10px; letter-spacing: 0.32em; font-weight: 600; color: rgba(255,255,255,0.7); }
+.wm-title span { color: rgba(255,255,255,0.4); background: none; -webkit-background-clip: initial; background-clip: initial; }
+.pill { font: 500 10.5px var(--font); padding: 5px 10px; gap: 6px; color: rgba(255,255,255,0.85);
+  background: rgba(10,8,18,0.45); border-color: rgba(255,255,255,0.12); }
+.pill:hover { background: rgba(10,8,18,0.7); }
+.pill.icon { padding: 5px 8px; font-size: 11px; }
+.pill .dot { width: 6px; height: 6px; }
+.hud-bottom { bottom: 12px; font-size: 10.5px; color: rgba(255,255,255,0.55); letter-spacing: 0.04em; }
+.panel { background: rgba(14,12,22,0.72); color: #eceaf5; border-color: rgba(255,255,255,0.1); border-radius: 10px; }
+#settings { top: 48px; right: 16px; width: 230px; padding: 12px 14px; }
+#settings label { font-size: 11px; }
+#settings h3, #settings .fine, #settings label output { color: rgba(255,255,255,0.55); }
+.label { left: 16px; bottom: 16px; width: 260px; padding: 12px 14px 12px; }
+.label-no { font-size: 9px; color: rgba(255,255,255,0.5); }
+.label h2 { font-size: 15px; margin: 3px 0 2px; }
+.label-finish { font-size: 9px; padding: 2px 6px; background: rgba(255,255,255,0.12); }
+.label p { font-size: 11px; line-height: 1.45; color: rgba(255,255,255,0.65); margin-top: 6px; }
+.label-actions { gap: 6px; margin-top: 10px; }
+.label-actions button { font-size: 10.5px; padding: 5px 9px; border-radius: 7px; background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.14); }
+.label-actions button.primary { background: #fff; color: #111; border-color: #fff; }
+.label-actions .label-tip { font-size: 9.5px; color: rgba(255,255,255,0.5); }

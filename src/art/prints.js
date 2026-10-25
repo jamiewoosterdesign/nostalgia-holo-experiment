@@ -633,7 +633,7 @@ export function blisterBacker() {
 // ---------------------------------------------------------------------------
 export const LENS_RECT = { x: 64, y: 64, w: CARD_W - 128, h: 1060 };
 
-export function motionCardBorder() {
+export function motionCardBorder({ title = 'STARHAWK', sub = 'JUMP SEQUENCE  ·  MOTION 3 OF 12', footer = 'STARLINE ✦ MOTION', code = 'M3' } = {}) {
   const W = CARD_W, H = CARD_H;
   const { map, mask, a, m } = pair(W, H);
   const g = a.createLinearGradient(0, 0, W, H);
@@ -664,8 +664,8 @@ export function motionCardBorder() {
   m.fillStyle = '#000';
   rr(m, np.x, np.y, np.w, np.h, 18);
   m.fill();
-  text(a, 'STARHAWK', np.x + 40, np.y + 92, `900 76px ${FONT.display}`, '#ffffff', 'left');
-  text(a, 'JUMP SEQUENCE  ·  MOTION 3 OF 12', np.x + 42, np.y + 134, `600 24px ${FONT.mono}`, '#8fe9ff', 'left');
+  text(a, title, np.x + 40, np.y + 92, `900 76px ${FONT.display}`, '#ffffff', 'left');
+  text(a, sub, np.x + 42, np.y + 134, `600 24px ${FONT.mono}`, '#8fe9ff', 'left');
   // tilt icon
   a.save();
   a.translate(np.x + np.w - 90, np.y + 80);
@@ -678,8 +678,8 @@ export function motionCardBorder() {
   a.stroke();
   text(a, 'TILT', 0, 46, `800 22px ${FONT.body}`, '#ffdf3d');
   a.restore();
-  text(a, 'STARLINE ✦ MOTION', 80, H - 50, `700 28px ${FONT.body}`, '#10143c', 'left');
-  text(a, 'M3', W - 80, H - 50, `700 28px ${FONT.mono}`, '#10143c', 'right');
+  text(a, footer, 80, H - 50, `700 28px ${FONT.body}`, '#10143c', 'left');
+  text(a, code, W - 80, H - 50, `700 28px ${FONT.mono}`, '#10143c', 'right');
   return {
     map,
     mask,
