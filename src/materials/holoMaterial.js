@@ -200,7 +200,7 @@ const FRAG_MAIN = /* glsl */ `
   vec2 pat = hPattern(huv);
   float vT = dot(V, hT[0]);
   float vB = dot(V, hT[1]);
-  float hue = vT * uTiltGain.x + vB * uTiltGain.y + pat.x * uPatternMix + uHueShift + uTime * 0.015;
+  float hue = vT * uTiltGain.x + vB * uTiltGain.y + pat.x * uPatternMix + uHueShift;
 
   float cellRand = 0.0;
   #ifdef HOLO_SPARKLE

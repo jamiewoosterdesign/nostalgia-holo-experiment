@@ -5,7 +5,7 @@ const DEFAULTS = {
   parallax: 1.15, screenCm: 19.5, camFov: 62, smoothing: 1,
   reflect: true, bloom: true, dof: true, preview: false,
 };
-const STORE = 'holo-archive-settings-v1';
+const STORE = 'holo-archive-settings-v3';
 
 export class UI {
   constructor() {
@@ -18,7 +18,10 @@ export class UI {
     $('btn-settings').addEventListener('click', () => $('settings').classList.toggle('hidden'));
 
     let saved = {};
-    try { saved = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch {}
+    try {
+      const current = localStorage.getItem(STORE);
+      saved = current ? JSON.parse(current) : { ...JSON.parse(localStorage.getItem('holo-archive-settings-v2') || localStorage.getItem('holo-archive-settings-v1') || '{}'), bloom: true };
+    } catch {}
     this.settings = { ...DEFAULTS, ...saved };
     const ranges = ['parallax', 'screenCm', 'camFov', 'smoothing'];
     const checks = { reflect: 'q-reflect', bloom: 'q-bloom', dof: 'q-dof', preview: 'q-preview' };
@@ -90,8 +93,10 @@ export class UI {
     const actions = [...ex.info.actions, { id: 'back', label: 'Return', key: 'Esc' }];
     for (const a of actions) {
       const b = document.createElement('button');
+      b.setAttribute('aria-label', a.label);
       if (a.primary) b.className = 'primary';
-      b.innerHTML = `${a.label}${a.key ? ` <kbd>${a.key}</kbd>` : ''}`;
+      const keyLabel = { ArrowLeft: '←', ArrowRight: '→' }[a.key] || a.key;
+      b.innerHTML = `${a.label}${a.key ? ` <kbd>${keyLabel}</kbd>` : ''}`;
       b.addEventListener('click', () => onAction(a.id));
       box.appendChild(b);
     }

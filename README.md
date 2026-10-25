@@ -1,58 +1,56 @@
-# HOLO/ARCHIVE: Gallery 01, Foil & Light
+# HOLO/ARCHIVE
 
-An experiment in holographic print finishes and off-axis "window" depth, built with Three.js.
+A personal nostalgia gallery built with Three.js: real collectible scans, angle-dependent print finishes, transparent acetate, and an off-axis room you can look into.
 
-## Run it
+## Run locally
 
-```bash
+```sh
 npm install
-npm run dev
+npm run dev -- --host 127.0.0.1
 ```
 
-Open http://localhost:5173 and click **Enable head tracking**. Browsers only allow camera access on `localhost` or HTTPS.
+Open http://127.0.0.1:5173. Build with `npm run build`; serve the build with `npm run preview`. Vercel builds this Vite project from `main` and serves `dist`.
 
-The mouse stands in for your head until a face is found, and again whenever you leave the frame.
+## The collection
+
+| Exhibit | Artwork and finish |
+|---|---|
+| Hulk | 1994 Marvel Masterpieces Silver Holofoil, fine silver microflakes with dense ink over the figure |
+| Wolverine | Suspended Animation front and reverse supplied by the owner, printed on a genuinely transmissive purple/amber acetate surface |
+| Spider-Man #50 | September 1994 cover, with a diffraction mask confined to the two Holo-Grafx eyes |
+| U.S.S. Enterprise | Original period-inspired Star Trek packaging, printed space backdrop, holographic title lettering, clear blister and unpackable model |
+| Bartman W2 | Two photographed poses from the 1994 SkyBox Wiggle card, selected by viewing angle, plus its real puzzle reverse |
+| Upper Deck pack | Real silver/red 1994–95 Hobby wrapper and 12 real card fronts and backs, including Jordan Holojam, a checklist and a Special Edition foil |
+
+The pack is a curated 1991–94 selection inside a period wrapper, not a reconstruction of factory collation. Hulk and the comic have clearly labelled archive display reverses because original reverse scans are not included. The toy packaging is a new mockup, not a scan of a historical retail package.
 
 ## Controls
 
 | Action | Input |
 |---|---|
-| Look into the room | Move your head, or the mouse when tracking is off |
-| Move closer or further | Lean in, or use the scroll wheel |
-| Inspect an exhibit | Click it |
-| Tilt it | Drag |
-| Flip it | Double-click or `F` |
-| Unpack the blister | `U` |
-| Return it | `Esc`, or click empty space |
-| Calibration and quality | The ⚙ button |
+| Look into the room | Move the mouse, or enable optional head tracking |
+| Move closer / further | Scroll wheel, or lean with tracking enabled |
+| Inspect | Click an object, or keys `1`–`6` |
+| Tilt | Drag the selected object |
+| Flip | `F`, double-click, or the Flip button |
+| Unpack / repack the ship | `U` |
+| Open / reseal basketball pack | `O` |
+| Browse the open pack | Left / Right arrow keys or Previous / Next card |
+| Return to gallery | `Esc` or click empty space |
+| Calibration and quality | Gear button |
 
-**Calibration tips.** Set *Screen height* to your display's physical height: a 14" MacBook Pro is about 19.5 cm and a 16" is about 22.5 cm. If the room feels swimmy, lower *Parallax*. If tracking jitters, raise *Smoothing*.
+Bloom starts enabled at a restrained strength. Floor reflections and depth of field can also be toggled. Quality preferences persist locally. Head tracking requires camera permission and either localhost or HTTPS; mouse interaction works without a camera.
 
-## How it works
+## Sources and implementation
 
-- **Off-axis projection** (`src/render/offAxisCamera.js`). The screen is a fixed window at z = 0, and moving the eye skews the frustum instead of rotating the camera. That is what makes the screen read as a window.
-- **Head tracking** (`src/tracking/`). MediaPipe Face Landmarker finds the iris centres. Distance comes from the inter-pupil gap, and a One-Euro filter smooths the result. With several faces in view, it locks onto one and keeps following that person.
-- **HoloMaterial** (`src/materials/holoMaterial.js`). A `MeshPhysicalMaterial` with a print and foil stage injected before lighting. The foil changes base colour, metalness, roughness and the shading normal, so the rainbows are real reflections of the room. A mask texture says where each finish goes:
-  - **R:** prismatic foil (linear, concentric, starburst, diamond or cracked-ice diffraction)
-  - **G:** sparkle flakes. Each Voronoi cell gets its own random tilt, so cells glint independently.
-  - **B:** metallic ink. The art colour becomes tinted metal.
-  - A **height map** adds embossing, `brush` adds brushed-metal streaks, `crinkle` adds film creases, and `lenticular` picks animation frames by viewing angle under ridged lenses.
-- **Shared environment** (`src/render/environment.js`). Soft window-shaped light panels are baked into the environment map, so the same reflection slides across every surface.
-- **Floor mirror** (`src/render/mirror.js`). A planar reflection that stays correct under the skewed off-axis frustum, blurred by mip level.
-- **Ships** (`src/ships/`). Two original procedural models: an explorer cruiser and a battered freighter. The studio renders them into the card art and into the 16-frame motion-card atlas.
+See [ASSET_SOURCES.md](ASSET_SOURCES.md) and the JSON provenance files under `public/assets/`. Original source photos remain unchanged on disk. The renderer crops and perspective-corrects them, applies separate finish masks, and recreates the physical substrates. Texture canvas dimensions do not imply additional source detail. Bartman's photographs retain some optical ghosting; better scans of both poses can replace them later.
 
-## Art and model slots
+- `src/exhibits/realCatalog.js`: the six exhibits and their material settings.
+- `src/exhibits/basketballPack.js`: opening, browsing and flipping all 12 cards.
+- `src/exhibits/wolverine.js`: independent front/reverse ink masks and transparent substrate.
+- `src/art/simpsonsFrames.js`: perspective rectification and the two-pose lenticular atlas.
+- `src/art/toyPackaging.js`: editable canvas artwork and title-only foil masks.
+- `src/materials/holoMaterial.js`: view-dependent diffraction, metallic ink, microflakes and lenticular lenses.
+- `src/render/offAxisCamera.js` and `src/tracking/`: room projection and optional face tracking.
 
-Everything is built from images in `public/art/` (png, jpg or webp). Swap any of them for your own scans or photos, reload, and the print shop in `src/art/era.js` re-separates the foil automatically.
-
-| File | Exhibit | How the finish is derived |
-|---|---|---|
-| `dunk.png` | 01 Prism parallel card | Dark shadows in the photo go prismatic; gold name is embossed metallic ink |
-| `drive.png` | 02 Holoview insert | Transparent PNG or green screen: the figure prints matte over a full diamond-foil background |
-| `comic.png` | 03 Chromium comic | Whole cover over foil; highlights flare, sparkle in the hottest whites; bright saturated masthead is embossed metal |
-| `blister.png` | 04 Blister backing window | Cracked-ice foil under the art |
-| `flicker.png` | 05 Lenticular card | Three frames side by side; each is cropped to the lens window |
-| `pack.png` | 06 Wax pack wrapper | Metallised film everywhere except near-white areas (opaque white ink) |
-| `poster-1.png`, `poster-2.png` | Wall laser posters | Holographic film with transparent inks, sparkle in highlights |
-
-Optional: drop a `public/models/toy.glb` and it replaces the procedural ship inside the blister pack (auto-centred and scaled).
+To use a custom ship, put a GLB in `public/models/` and set `VITE_TOY_MODEL_URL=/models/toy.glb` in the build environment. Without that setting, the built-in model is used without requesting a missing file.

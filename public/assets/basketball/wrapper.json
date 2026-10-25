@@ -1,0 +1,17 @@
+{
+  "front": "wrapper-upper-deck-perfectedges-1.jpg",
+  "back": "wrapper-upper-deck-perfectedges-3.jpg",
+  "crop": [40, 48, 935, 1520],
+  "backCrop": [37, 38, 932, 1530],
+  "quad": [[40, 66], [979, 31], [977, 1562], [44, 1575]],
+  "backQuad": [[33, 27], [983, 73], [964, 1575], [43, 1557]],
+  "quadOrder": "top-left, top-right, bottom-right, bottom-left; source pixel coordinates",
+  "dimensions": [1003, 1600],
+  "backDimensions": [1004, 1600],
+  "title": "1994-95 Upper Deck NBA Basketball Series One Hobby Pack",
+  "retrieved": "2026-10-25",
+  "page": "https://perfectedgescards.com/products/1994-95-upper-deck-nba-basketball-series-1-hobby-pack-factory-sealed-packs",
+  "frontUrl": "https://cdn.shopify.com/s/files/1/0618/8512/0697/products/256165316046-1.jpg?v=1700169028",
+  "backUrl": "https://cdn.shopify.com/s/files/1/0618/8512/0697/products/256165316046-3.jpg?v=1700169028",
+  "notes": "Actual matching silver/red HOBBY wrapper, 12 cards and one Special Edition per pack. Source 0 is the full-resolution original of the user's supplied reference composition; source 1 is the same packet photographed individually, nearly straight-on. Both front and back have clear text and authentic foil/crimps. Crop and quad are approximate texture-placement guidance; source photos are unmodified."
+}

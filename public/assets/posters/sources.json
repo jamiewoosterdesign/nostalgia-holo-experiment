@@ -1,0 +1,22 @@
+{
+  "downloaded": "2026-10-25",
+  "notes": "Original theatrical poster scans downloaded for the user's personal local nostalgia art project. No image generation, upscaling, or retouching. The Jurassic Park scan is the original advance version with the same iconic logo/key art, adding an Opens June 11th line at the foot. The Terminator 2 scan matches the supplied motorcycle design.",
+  "images": [
+    {
+      "file": "jurassic-park-1993.jpg",
+      "title": "Jurassic Park (1993), US advance one-sheet",
+      "dimensions": [1019, 1500],
+      "page": "https://www.originalfilmart.com/products/jurassic-park-1993",
+      "image": "https://cdn.shopify.com/s/files/1/1416/8662/products/jurassic_park_1993_advance_original_film_art_c8730d32-751d-407f-ac10-85757b22b3e0.jpg?v=1598313257",
+      "rights": "Original poster artwork remains the property of the respective rights holders. Source scan: Original Film Art."
+    },
+    {
+      "file": "terminator-2-1991.jpg",
+      "title": "Terminator 2: Judgment Day (1991), US advance one-sheet",
+      "dimensions": [1187, 1750],
+      "page": "https://www.originalfilmart.com/products/terminator-2",
+      "image": "https://cdn.shopify.com/s/files/1/1416/8662/products/terminator_2_1991_advance_original_film_art.jpg?v=1594872723",
+      "rights": "Original poster artwork remains the property of the respective rights holders. Source scan: Original Film Art."
+    }
+  ]
+}

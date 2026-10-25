@@ -1,0 +1,300 @@
+{
+  "note": "A curated personal nostalgia selection across 1991-94, displayed inside a 1994-95 wrapper; not a recreation of factory pack collation. Native source scans are preserved. Holographic finishes are interactive interpretations.",
+  "pack": {
+    "front": "wrapper-upper-deck-perfectedges-1.jpg",
+    "back": "wrapper-upper-deck-perfectedges-3.jpg",
+    "crop": [
+      40,
+      48,
+      935,
+      1520
+    ],
+    "backCrop": [
+      37,
+      38,
+      932,
+      1530
+    ],
+    "quad": [
+      [
+        40,
+        66
+      ],
+      [
+        979,
+        31
+      ],
+      [
+        977,
+        1562
+      ],
+      [
+        44,
+        1575
+      ]
+    ],
+    "backQuad": [
+      [
+        33,
+        27
+      ],
+      [
+        983,
+        73
+      ],
+      [
+        964,
+        1575
+      ],
+      [
+        43,
+        1557
+      ]
+    ],
+    "quadOrder": "top-left, top-right, bottom-right, bottom-left; source pixel coordinates",
+    "dimensions": [
+      1003,
+      1600
+    ],
+    "backDimensions": [
+      1004,
+      1600
+    ],
+    "title": "1994-95 Upper Deck NBA Basketball Series One Hobby Pack",
+    "retrieved": "2026-10-25",
+    "page": "https://perfectedgescards.com/products/1994-95-upper-deck-nba-basketball-series-1-hobby-pack-factory-sealed-packs",
+    "frontUrl": "https://cdn.shopify.com/s/files/1/0618/8512/0697/products/256165316046-1.jpg?v=1700169028",
+    "backUrl": "https://cdn.shopify.com/s/files/1/0618/8512/0697/products/256165316046-3.jpg?v=1700169028",
+    "notes": "Actual matching silver/red HOBBY wrapper, 12 cards and one Special Edition per pack. Source 0 is the full-resolution original of the user's supplied reference composition; source 1 is the same packet photographed individually, nearly straight-on. Both front and back have clear text and authentic foil/crimps. Crop and quad are approximate texture-placement guidance; source photos are unmodified."
+  },
+  "cards": [
+    {
+      "name": "Michael Jordan",
+      "year": "1993–94",
+      "set": "Upper Deck",
+      "number": "23",
+      "front": "jordan-23-front.jpg",
+      "back": "jordan-23-back.jpg",
+      "crop": [
+        24,
+        24,
+        750,
+        1046
+      ],
+      "finish": "paper",
+      "backCrop": [
+        24,
+        23,
+        750,
+        1044
+      ]
+    },
+    {
+      "name": "Shaquille O'Neal · Rookie of the Year",
+      "year": "1993–94",
+      "set": "Upper Deck · Season Leaders",
+      "number": "177",
+      "front": "shaq-177-sportcards-front.jpg",
+      "crop": [
+        34,
+        22,
+        710,
+        1048
+      ],
+      "finish": "paper",
+      "back": "shaq-177-sportcards-back.jpg",
+      "backCrop": [
+        27,
+        20,
+        753,
+        1046
+      ]
+    },
+    {
+      "name": "Charles Barkley",
+      "year": "1993–94",
+      "set": "Upper Deck · All-NBA First Team",
+      "number": "AN1",
+      "front": "barkley-an1-front.jpg",
+      "back": "barkley-an1-back.jpg",
+      "crop": [
+        26,
+        24,
+        750,
+        1038
+      ],
+      "finish": "paper",
+      "backCrop": [
+        24,
+        23,
+        752,
+        1042
+      ]
+    },
+    {
+      "name": "Scottie Pippen",
+      "year": "1993–94",
+      "set": "Upper Deck",
+      "number": "310",
+      "front": "pippen-310-front.jpg",
+      "back": "pippen-310-back.jpg",
+      "crop": [
+        25,
+        24,
+        752,
+        1048
+      ],
+      "finish": "paper",
+      "backCrop": [
+        24,
+        24,
+        751,
+        1042
+      ]
+    },
+    {
+      "name": "Michael Jordan · Holojam",
+      "year": "1993–94",
+      "set": "Upper Deck · Holojam",
+      "number": "H4",
+      "front": "jordan-holojam-front.jpg",
+      "back": "jordan-holojam-back.jpg",
+      "finish": "hologram"
+    },
+    {
+      "name": "Hakeem Olajuwon",
+      "year": "1993–94",
+      "set": "Upper Deck · Executive Board",
+      "number": "425",
+      "front": "hakeem-425-front.jpg",
+      "back": "hakeem-425-back.jpg",
+      "crop": [
+        24,
+        23,
+        752,
+        1053
+      ],
+      "finish": "paper",
+      "backCrop": [
+        25,
+        24,
+        752,
+        1048
+      ]
+    },
+    {
+      "name": "David Robinson",
+      "year": "1993–94",
+      "set": "Upper Deck · Skylights",
+      "number": "474",
+      "front": "robinson-474-front.jpg",
+      "back": "robinson-474-back.jpg",
+      "finish": "paper"
+    },
+    {
+      "name": "Shawn Kemp",
+      "year": "1993–94",
+      "set": "Upper Deck · Skylights",
+      "number": "475",
+      "front": "kemp-475-front.jpg",
+      "back": "kemp-475-back.jpg",
+      "finish": "paper",
+      "crop": [
+        46,
+        78,
+        747,
+        1047
+      ],
+      "backCrop": [
+        46,
+        72,
+        749,
+        1044
+      ]
+    },
+    {
+      "name": "John Stockton · Special Edition",
+      "year": "1993–94",
+      "set": "Upper Deck · Special Edition",
+      "number": "90",
+      "front": "stockton-se90-front.jpg",
+      "back": "stockton-se90-back.jpg",
+      "crop": [
+        25,
+        27,
+        750,
+        1053
+      ],
+      "finish": "foil",
+      "backCrop": [
+        24,
+        24,
+        752,
+        1049
+      ]
+    },
+    {
+      "name": "Shaquille O'Neal",
+      "year": "1993–94",
+      "set": "Upper Deck",
+      "number": "300",
+      "front": "shaq-300-front.jpg",
+      "back": "shaq-300-back.jpg",
+      "crop": [
+        24,
+        76,
+        754,
+        1036
+      ],
+      "finish": "paper",
+      "backCrop": [
+        25,
+        79,
+        752,
+        1034
+      ]
+    },
+    {
+      "name": "Scottie Pippen · Electric Court",
+      "year": "1993–94",
+      "set": "Upper Deck SE · Electric Court",
+      "number": "202",
+      "front": "pippen-ec202-front.jpg",
+      "back": "pippen-ec202-back.jpg",
+      "finish": "paper",
+      "crop": [
+        32,
+        32,
+        750,
+        1006
+      ],
+      "backCrop": [
+        24,
+        22,
+        752,
+        1038
+      ]
+    },
+    {
+      "name": "Michael Jordan · All-Star Checklist",
+      "year": "1991–92",
+      "set": "Upper Deck",
+      "number": "48",
+      "front": "jordan-checklist-front.jpg",
+      "back": "jordan-checklist-back.jpg",
+      "crop": [
+        23,
+        23,
+        751,
+        1051
+      ],
+      "finish": "paper",
+      "backCrop": [
+        24,
+        24,
+        750,
+        1048
+      ]
+    }
+  ]
+}

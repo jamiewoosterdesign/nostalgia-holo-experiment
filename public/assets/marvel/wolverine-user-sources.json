@@ -1,0 +1,13 @@
+{
+  "subject": "Wolverine, Fleer Ultra X-Men Suspended Animation, 10 of 10",
+  "artistPrintedOnReverse": "Gary Ciccarelli",
+  "copyrightPrintedOnReverse": "1994 Marvel",
+  "source": "User supplied original photographs, copied without modification",
+  "files": [
+    {"file": "wolverine-user-front.jpg", "dimensions": [960, 1280], "quadPixelsTLTRBRBL": [[145,149],[796,134],[818,1099],[126,1083]]},
+    {"file": "wolverine-user-back.jpg", "dimensions": [960, 1280], "quadPixelsTLTRBRBL": [[146,216],[768,201],[795,1144],[123,1118]]}
+  ],
+  "rendering": "The app perspective-corrects source photos at runtime and uses hand-traced ink masks. Front and reverse are independently rendered original art. Photographed tabletop texture in clear areas is replaced by a true transmissive thin acetate material with purple-to-amber dye and clear filmstrip windows. Texture canvas is 1024 by 1434; this is a rendering resolution, not a claim that the source contains that much detail.",
+  "module": "src/exhibits/wolverine.js",
+  "qa": "Syntax check passed. Both ink masks visually inspected against a checkerboard in an isolated browser preview. Integration lighting and transmission are checked by the main agent in the gallery."
+}

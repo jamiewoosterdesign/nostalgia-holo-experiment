@@ -11,7 +11,6 @@ import { FloorMirror } from './render/mirror.js';
 import { holoGlobals } from './materials/holoMaterial.js';
 import { foilLights } from './render/hyperspace.js';
 import { buildRoom, ROOM, loadPosters } from './gallery/room.js';
-import { ShipStudio } from './ships/studio.js';
 import { buildCatalog } from './exhibits/catalog.js';
 import { HeadTracker } from './tracking/headTracker.js';
 import { Viewer } from './tracking/viewer.js';
@@ -37,7 +36,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('#07040d');
 const envMap = buildEnvironment(renderer);
 scene.environment = envMap;
-scene.environmentIntensity = 0.95;
+scene.environmentIntensity = 0.65;
 
 const camera = new OffAxisCamera();
 const aspect0 = () => window.innerWidth / window.innerHeight;
@@ -45,7 +44,7 @@ camera.aspect = aspect0();
 camera.setEye(0, 0.05, 2.8);
 
 // Lights: soft key from upper-front-left (window light), cool fill, warm bounce.
-const key = new THREE.DirectionalLight('#fff6ea', 2.4);
+const key = new THREE.DirectionalLight('#fff6ea', 1.8);
 key.position.set(-0.9, 1.6, 1.4);
 key.target.position.set(0, -0.3, -0.6);
 key.castShadow = true;
@@ -60,7 +59,7 @@ key.shadow.bias = -0.0004;
 key.shadow.normalBias = 0.01;
 key.shadow.radius = 6;
 scene.add(key, key.target);
-scene.add(new THREE.HemisphereLight('#f4f2ff', '#d8d2e8', 0.55));
+scene.add(new THREE.HemisphereLight('#f4f2ff', '#d8d2e8', 0.35));
 const torch = new THREE.PointLight('#ffffff', 0, 1.6, 1.6);
 scene.add(torch);
 
@@ -95,9 +94,9 @@ function layout() {
   const backZ = -0.95;
   const midZ = -0.4;
 
-  const topRef = room.makePlinth(x(-0.62), backZ, 0.17, 0.4, 0.1, '#8a5cff', '02', 'Starburst refractor');
+  const topRef = room.makePlinth(x(-0.62), backZ, 0.17, 0.4, 0.1, '#8a5cff', '02', 'Suspended Animation');
   const topBlister = room.makePlinth(0, backZ - 0.08, 0.2, 0.36, 0.12, '#ff7a2b', '04', 'Carded blister');
-  const topComic = room.makePlinth(x(0.62), backZ, 0.17, 0.38, 0.1, '#2f7bff', '03', 'Embossed cover');
+  const topComic = room.makePlinth(x(0.62), backZ, 0.17, 0.38, 0.1, '#2f7bff', '03', 'Spider-Man #50');
 
   byId.holoview.setRest(new THREE.Vector3(x(-0.62), topRef + 0.15, backZ), 0.22);
   byId.blister.setRest(new THREE.Vector3(0, topBlister + 0.215, backZ - 0.08), 0);
@@ -123,7 +122,7 @@ composer.addPass(new RenderPass(scene, camera));
 const bokeh = new BokehPass(scene, camera, { focus: 2.5, aperture: 0.0, maxblur: 0.008 });
 bokeh.enabled = false;
 composer.addPass(bokeh);
-const bloom = new UnrealBloomPass(new THREE.Vector2(size.x, size.y), 0.35, 0.5, 1.6);
+const bloom = new UnrealBloomPass(new THREE.Vector2(size.x, size.y), 0.2, 0.45, 1.45);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
 bloom.enabled = params.has('bloom');
@@ -243,10 +242,12 @@ canvas.addEventListener('wheel', (e) => {
   viewer.mouseWheelZ = THREE.MathUtils.clamp(viewer.mouseWheelZ + e.deltaY * 0.002, -1.2, 1.6);
 }, { passive: true });
 window.addEventListener('keydown', (e) => {
+  if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
+  if (/^[1-6]$/.test(e.key)) { select(exhibits[Number(e.key) - 1]); return; }
   if (e.key === 'Escape') select(null);
   if (!selected) return;
   const k = e.key.toLowerCase();
-  for (const a of selected.info.actions) if (a.key && a.key.toLowerCase() === k) runAction(a.id);
+  for (const a of selected.info.actions) if (a.key && a.key.toLowerCase() === k) { e.preventDefault(); runAction(a.id); }
 });
 
 // ---------------------------------------------------------------------------
@@ -278,9 +279,8 @@ async function boot() {
   } catch {}
   ui.progress(0.2, 'Building starships…');
   await new Promise((r) => setTimeout(r, 30));
-  const studio = new ShipStudio(renderer, envMap);
-  ui.progress(0.4, 'Printing foils…');
-  exhibits = await buildCatalog({ studio });
+  ui.progress(0.4, 'Loading the collection…');
+  exhibits = await buildCatalog();
   exhibits.forEach((e) => exhibitLayer.add(e.root));
   ui.progress(0.75, 'Hanging the exhibits…');
   await loadPosters();
@@ -356,7 +356,7 @@ function frame() {
     torchPlane.constant = -(selected.root.position.z + 0.25);
     if (raycaster.ray.intersectPlane(torchPlane, tmpV)) torch.position.copy(tmpV);
   }
-  torch.intensity += ((inspecting ? 0.9 : 0) - torch.intensity) * (1 - Math.exp(-dt * 5));
+  torch.intensity += ((inspecting ? 0.08 : 0) - torch.intensity) * (1 - Math.exp(-dt * 5));
   holoGlobals.uTorchOn.value = torch.intensity;
 
   // Shader globals in view space

@@ -1,0 +1,170 @@
+{
+  "subject": "1994 SkyBox The Simpsons Series II Wiggle W2 Bartman Muscle",
+  "retrieved": "2026-10-25",
+  "identitySources": [
+    "https://www.tcdb.com/Checklist.cfm/sid/74030/1994-",
+    "https://simpsonswiki.com/wiki/1994_SkyBox_Simpsons_Trading_Cards",
+    "https://www.nslists.com/simpson2.htm"
+  ],
+  "assets": [
+    {
+      "file": "user-reference-bartman-w2.png",
+      "kind": "user-provided card reference",
+      "dimensions": [
+        249,
+        350
+      ],
+      "pose": "flexed bicep; eyes forward",
+      "crop": [
+        0,
+        0,
+        249,
+        350
+      ]
+    },
+    {
+      "file": "reference-angle-1.webp",
+      "page": "https://www.ebay.com/itm/224917548142",
+      "image": "https://i.ebayimg.com/images/g/e34AAOSwSExiSFEt/s-l1600.webp",
+      "dimensions": [
+        646,
+        1024
+      ],
+      "pose": "flexed bicep; eyes forward",
+      "quadPixelsTLTRBRBL": [
+        [
+          92,
+          277
+        ],
+        [
+          559,
+          280
+        ],
+        [
+          557,
+          936
+        ],
+        [
+          89,
+          933
+        ]
+      ],
+      "note": "Actual physical card photo. Small original lenticular ghosting remains. Quad excludes slab."
+    },
+    {
+      "file": "reference-angle-2.webp",
+      "page": "https://www.ebay.com/itm/224917548142",
+      "image": "https://i.ebayimg.com/images/g/h3QAAOSw3aNiSFEu/s-l1600.webp",
+      "dimensions": [
+        1310,
+        1600
+      ],
+      "pose": "slender bicep; eyes look down at arm",
+      "quadPixelsTLTRBRBL": [
+        [
+          306,
+          424
+        ],
+        [
+          1290,
+          516
+        ],
+        [
+          1021,
+          1534
+        ],
+        [
+          339,
+          1421
+        ]
+      ],
+      "note": "Actual second lenticular pose; perspective quad excludes hand and slab. Some ghosting is printed/optical in source."
+    },
+    {
+      "file": "reference-angle-3.webp",
+      "page": "https://www.ebay.com/itm/224917548142",
+      "image": "https://i.ebayimg.com/images/g/wBMAAOSwIV9iSFEy/s-l1600.webp",
+      "dimensions": [
+        1386,
+        1600
+      ],
+      "pose": "slender bicep; alternate photo of same second pose",
+      "quadPixelsTLTRBRBL": [
+        [
+          413,
+          517
+        ],
+        [
+          1322,
+          641
+        ],
+        [
+          1027,
+          1547
+        ],
+        [
+          410,
+          1414
+        ]
+      ],
+      "note": "Alternate view only; not a third animation pose."
+    },
+    {
+      "file": "reference-sgc9-1.webp",
+      "page": "https://www.ebay.com/itm/125828791745",
+      "image": "https://i.ebayimg.com/images/g/ROAAAOSw3ndkFPxd/s-l1600.webp",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "quadPixelsTLTRBRBL": [
+        [
+          299,
+          449
+        ],
+        [
+          891,
+          438
+        ],
+        [
+          1004,
+          1333
+        ],
+        [
+          235,
+          1355
+        ]
+      ],
+      "note": "Alternate authentic front, stronger double-image ghosting than angle-1."
+    },
+    {
+      "file": "reference-sgc9-2.webp",
+      "page": "https://www.ebay.com/itm/125828791745",
+      "image": "https://i.ebayimg.com/images/g/qJwAAOSwnatkFPxf/s-l1600.webp",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "quadPixelsTLTRBRBL": [
+        [
+          310,
+          545
+        ],
+        [
+          852,
+          540
+        ],
+        [
+          929,
+          1328
+        ],
+        [
+          237,
+          1333
+        ]
+      ],
+      "note": "Actual reverse side photo, a section of the set's cartoon puzzle."
+    }
+  ],
+  "animationLimits": "Two authentic optical poses are visibly documented. A third original master frame was not found. Intermediate crossfades may be used for the digital optical transition but must not be described as original animation frames."
+}

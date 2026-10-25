@@ -1,0 +1,40 @@
+{
+  "retrieved": "2026-10-25",
+  "notes": "Source photographs remain unedited. The Wolverine Suspended Animation design belongs to Fleer Ultra X-Men 1995, with a 1994 copyright on the card. The clean front source is photographed on light backing in a sleeve. No generated replacements or upscaling are used here. Material masks and crop can be applied separately by the renderer.",
+  "images": [
+    {
+      "file": "wolverine-suspended-ebay-256525257038.jpg",
+      "title": "Wolverine #10/10, 1995 Fleer Ultra X-Men Suspended Animation, front",
+      "dimensions": [1175, 1600],
+      "recommended": true,
+      "approximateCardBounds": [165, 220, 1032, 1447],
+      "quality": "Clean photograph on plain light backing; no strong specular glare. Slight photographic perspective. The effective card region is approximately 867 by 1227 pixels.",
+      "page": "https://www.ebay.com.au/itm/256525257038",
+      "image": "https://i.ebayimg.com/images/g/0hMAAOSwrEtmVIaU/s-l1600.jpg"
+    },
+    {
+      "file": "wolverine-suspended-ebay-225332202813.jpg",
+      "title": "Wolverine #10/10, 1995 Fleer Ultra X-Men Suspended Animation, alternate front",
+      "dimensions": [1150, 1600],
+      "quality": "Larger usable card region, plain dark backing; visible dust/scratches mainly in the clear plastic field.",
+      "page": "https://www.ebay.com/itm/225332202813",
+      "image": "https://i.ebayimg.com/00/s/MTYwMFgxMTUw/z/t0sAAOSwBXpjthZl/%24_32.JPG?set_id=880000500F"
+    },
+    {
+      "file": "wolverine-suspended-back-ebay-225332202813.jpg",
+      "title": "Wolverine #10/10, 1995 Fleer Ultra X-Men Suspended Animation, reverse",
+      "dimensions": [1200, 1600],
+      "quality": "Authentic reverse painting of the back of the character, with source credit banner. Visible dust/scratches in the transparent area and some perspective.",
+      "page": "https://www.ebay.com/itm/225332202813",
+      "image": "https://i.ebayimg.com/images/g/55gAAOSwGcxjthaP/s-l1600.jpg"
+    },
+    {
+      "file": "hulk-silver-pricecharting.jpg",
+      "title": "Hulk #4, 1994 Marvel Masterpieces Silver Holofoil",
+      "dimensions": [741, 1029],
+      "quality": "Clean straight-on scan already cropped to the card; lower pixel count than user reference but no holder/background perspective.",
+      "page": "https://www.pricecharting.com/game/marvel-1994-masterpieces/hulk-silver-holofoil-4",
+      "image": "https://commondatastorage.googleapis.com/images.pricecharting.com/912ba53e7f55761073d4508a71cc36e9113563a485631086845bd7f3350a71fd/1600.jpg"
+    }
+  ]
+}

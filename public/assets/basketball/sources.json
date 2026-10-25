@@ -1,0 +1,277 @@
+{
+  "retrieved": "2026-10-25",
+  "description": "A curated personal nostalgia selection across 1991-94, displayed inside a 1994-95 wrapper; not a recreation of factory pack collation. Native source scans are preserved. Holographic finishes are interactive interpretations.",
+  "rights": "Images depict original Upper Deck collectibles. Card designs, artwork, photos, and source photographs retain their respective rights. Source records document provenance and do not assert a license or legal conclusion.",
+  "notes": [
+    "Original source images remain unmodified; crop fields select the card area when rendered.",
+    "All twelve cards have authentic front and reverse scans.",
+    "The Jordan checklist is the 1991-92 All-Star Checklist #48, deliberately included as an earlier childhood-era selection.",
+    "Two cards receive interactive simulated shine: Holojam Jordan and Special Edition Stockton."
+  ],
+  "sources": [
+    {
+      "slug": "shaq-300",
+      "page": "https://www.kronozio.com/card/bf70745e-1cf8-4b06-962c-b26f4a028fa2/1993-94-Upper-Deck-Shaquille-O-Neal-300",
+      "images": [
+        "https://kronozio.blob.core.windows.net/images/card/bf70745e1cf84b06962cb26f4a028fa2_front.jpg",
+        "https://kronozio.blob.core.windows.net/images/card/bf70745e1cf84b06962cb26f4a028fa2_back.jpg"
+      ],
+      "files": [
+        {
+          "file": "shaq-300-front.jpg",
+          "width": 799,
+          "height": 1134,
+          "bytes": 248998
+        },
+        {
+          "file": "shaq-300-back.jpg",
+          "width": 799,
+          "height": 1138,
+          "bytes": 265490
+        }
+      ]
+    },
+    {
+      "slug": "pippen-310",
+      "page": "https://www.kronozio.com/card/e67b9024-fc61-4a76-97b3-02c26a8d316c/1993-94-Upper-Deck-Scottie-Pippen-310",
+      "images": [
+        "https://kronozio.blob.core.windows.net/images/card/e67b9024fc614a7697b302c26a8d316c_front.jpg",
+        "https://kronozio.blob.core.windows.net/images/card/e67b9024fc614a7697b302c26a8d316c_back.jpg"
+      ],
+      "files": [
+        {
+          "file": "pippen-310-front.jpg",
+          "width": 796,
+          "height": 1088,
+          "bytes": 193526
+        },
+        {
+          "file": "pippen-310-back.jpg",
+          "width": 796,
+          "height": 1088,
+          "bytes": 222963
+        }
+      ]
+    },
+    {
+      "slug": "barkley-an1",
+      "page": "https://kronozio.com/card/9aa9ec16-cfd4-4704-b3bd-ed915f34b308/1993-94-Upper-Deck-First-team-All-1-NBA-Charles-Barkley-AN1",
+      "images": [
+        "https://kronozio.blob.core.windows.net/images/card/9aa9ec16cfd44704b3bded915f34b308_front.jpg",
+        "https://kronozio.blob.core.windows.net/images/card/9aa9ec16cfd44704b3bded915f34b308_back.jpg"
+      ],
+      "files": [
+        {
+          "file": "barkley-an1-front.jpg",
+          "width": 802,
+          "height": 1085,
+          "bytes": 239687
+        },
+        {
+          "file": "barkley-an1-back.jpg",
+          "width": 798,
+          "height": 1086,
+          "bytes": 234165
+        }
+      ]
+    },
+    {
+      "slug": "jordan-23",
+      "page": "https://kronozio.com/card/9dd09d16-c4d4-4f54-bce6-cae9bc7fbbfa/1993-94-Upper-Deck-Michael-Jordan-23",
+      "images": [
+        "https://kronozio.blob.core.windows.net/images/card/9dd09d16c4d44f54bce6cae9bc7fbbfa_front.jpg",
+        "https://kronozio.blob.core.windows.net/images/card/9dd09d16c4d44f54bce6cae9bc7fbbfa_back.jpg"
+      ],
+      "files": [
+        {
+          "file": "jordan-23-front.jpg",
+          "width": 798,
+          "height": 1094,
+          "bytes": 225296
+        },
+        {
+          "file": "jordan-23-back.jpg",
+          "width": 796,
+          "height": 1091,
+          "bytes": 211833
+        }
+      ]
+    },
+    {
+      "slug": "robinson-474",
+      "page": "https://www.kronozio.com/card/9ba700c2-529c-465d-be3e-296a809a0cd1/1993-94-Upper-Deck-David-Robinson-474",
+      "images": [
+        "https://kronozio.blob.core.windows.net/images/card/9ba700c2529c465dbe3e296a809a0cd1_front.jpg",
+        "https://kronozio.blob.core.windows.net/images/card/9ba700c2529c465dbe3e296a809a0cd1_back.jpg"
+      ],
+      "files": [
+        {
+          "file": "robinson-474-front.jpg",
+          "width": 786,
+          "height": 1090,
+          "bytes": 157951
+        },
+        {
+          "file": "robinson-474-back.jpg",
+          "width": 786,
+          "height": 1090,
+          "bytes": 212670
+        }
+      ]
+    },
+    {
+      "slug": "hakeem-425",
+      "page": "https://kronozio.com/card/d7003f46-1499-4a89-b1cc-b36d7dd64050/1993-94-Upper-Deck-Hakeem-Olajuwon-425",
+      "images": [
+        "https://kronozio.blob.core.windows.net/images/card/d7003f4614994a89b1ccb36d7dd64050_front.jpg",
+        "https://kronozio.blob.core.windows.net/images/card/d7003f4614994a89b1ccb36d7dd64050_back.jpg"
+      ],
+      "files": [
+        {
+          "file": "hakeem-425-front.jpg",
+          "width": 800,
+          "height": 1101,
+          "bytes": 286437
+        },
+        {
+          "file": "hakeem-425-back.jpg",
+          "width": 801,
+          "height": 1096,
+          "bytes": 265291
+        }
+      ]
+    },
+    {
+      "slug": "stockton-se90",
+      "page": "https://kronozio.com/card/9615bf83-41f3-4a2d-b410-3823985de7f9/1993-94-Upper-Deck-SE-John-Stockton-90",
+      "images": [
+        "https://kronozio.blob.core.windows.net/images/card/9615bf8341f34a2db4103823985de7f9_front.jpg",
+        "https://kronozio.blob.core.windows.net/images/card/9615bf8341f34a2db4103823985de7f9_back.jpg"
+      ],
+      "files": [
+        {
+          "file": "stockton-se90-front.jpg",
+          "width": 799,
+          "height": 1106,
+          "bytes": 215968
+        },
+        {
+          "file": "stockton-se90-back.jpg",
+          "width": 802,
+          "height": 1096,
+          "bytes": 245944
+        }
+      ]
+    },
+    {
+      "slug": "pippen-ec202",
+      "page": "https://kronozio.com/card/5d0ba136-ceb9-4a8c-adf3-7616c7f1570e/1993-94-Upper-Deck-SE-Electric-Court-Scottie-Pippen-TH-202",
+      "images": [
+        "https://www.kronozio.com/remote.axd/kronozio.blob.core.windows.net/images/card/5d0ba136ceb94a8cadf37616c7f1570e_front.jpg?rotate=180&quality=100",
+        "https://www.kronozio.com/remote.axd/kronozio.blob.core.windows.net/images/card/5d0ba136ceb94a8cadf37616c7f1570e_back.jpg?rotate=180&quality=100"
+      ],
+      "files": [
+        {
+          "file": "pippen-ec202-front.jpg",
+          "width": 796,
+          "height": 1066,
+          "bytes": 559599
+        },
+        {
+          "file": "pippen-ec202-back.jpg",
+          "width": 799,
+          "height": 1087,
+          "bytes": 532575
+        }
+      ]
+    },
+    {
+      "slug": "jordan-holojam",
+      "page": "https://supercatch.com/product/1993-94-upper-deck-holojam-michael-jordan-h4",
+      "images": [
+        "https://cdn.supercatch.com/product-images/sports-card/sports_card_01KSQDRRW400APW28Z7E7WZQQS/2026/05/29/front/1993-94-upper-deck-michael-jordan-h4-basketball-card-front-wsv9326c.jpg?w=1280",
+        "https://cdn.supercatch.com/product-images/sports-card/sports_card_01KSQDRRW400APW28Z7E7WZQQS/2026/05/29/back/1993-94-upper-deck-michael-jordan-h4-basketball-card-back-wsv9326c.jpg?w=1280"
+      ],
+      "files": [
+        {
+          "file": "jordan-holojam-front.jpg",
+          "width": 756,
+          "height": 1061,
+          "bytes": 107634
+        },
+        {
+          "file": "jordan-holojam-back.jpg",
+          "width": 760,
+          "height": 1059,
+          "bytes": 88638
+        }
+      ]
+    },
+    {
+      "slug": "jordan-checklist",
+      "page": "https://www.kronozio.com/card/fe05c919-c619-4d5a-9a7c-f34f16b2e465/1991-92-Upper-Deck-All-Star-Checklist-Michael-Jordan-48",
+      "images": [
+        "https://kronozio.blob.core.windows.net/images/card/fe05c919c6194d5a9a7cf34f16b2e465_front.jpg",
+        "https://kronozio.blob.core.windows.net/images/card/fe05c919c6194d5a9a7cf34f16b2e465_back.jpg"
+      ],
+      "files": [
+        {
+          "file": "jordan-checklist-front.jpg",
+          "width": 796,
+          "height": 1100,
+          "bytes": 274808
+        },
+        {
+          "file": "jordan-checklist-back.jpg",
+          "width": 798,
+          "height": 1095,
+          "bytes": 296111
+        }
+      ]
+    },
+    {
+      "slug": "kemp-475",
+      "page": "https://kronozio.com/card/27d1162e-e1d4-4f92-9f04-25c9d9fe9955/1993-94-Upper-Deck-Shawn-Kemp-475",
+      "images": [
+        "https://kronozio.blob.core.windows.net/images/card/27d1162ee1d44f929f0425c9d9fe9955_front.jpg",
+        "https://kronozio.blob.core.windows.net/images/card/27d1162ee1d44f929f0425c9d9fe9955_back.jpg"
+      ],
+      "files": [
+        {
+          "file": "kemp-475-front.jpg",
+          "width": 838,
+          "height": 1158,
+          "bytes": 229973
+        },
+        {
+          "file": "kemp-475-back.jpg",
+          "width": 844,
+          "height": 1154,
+          "bytes": 276443
+        }
+      ]
+    },
+    {
+      "slug": "shaq-177-sportcards",
+      "page": "https://sportcards.com/products/1993-94-upper-deck-177-shaquille-oneal-sportcards-com",
+      "images": [
+        "https://sportcards.com/cdn/shop/files/33861939-front.jpg?v=1758734605",
+        "https://sportcards.com/cdn/shop/files/33861939-back.jpg?v=1758734605"
+      ],
+      "files": [
+        {
+          "file": "shaq-177-sportcards-front.jpg",
+          "width": 763,
+          "height": 1437,
+          "bytes": 200901
+        },
+        {
+          "file": "shaq-177-sportcards-back.jpg",
+          "width": 833,
+          "height": 1466,
+          "bytes": 241739
+        }
+      ]
+    }
+  ]
+}

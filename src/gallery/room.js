@@ -3,12 +3,13 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 import { makeCanvas, ctxOf, colorTex, dataTex, rr } from '../art/canvasKit.js';
 import { plaque } from '../art/prints.js';
 import { createHoloMaterial } from '../materials/holoMaterial.js';
-import { holoLaminate, laserPoster, loadArt } from '../art/era.js';
+import { holoLaminate } from '../art/era.js';
+import { loadImage, scan } from '../art/realPrints.js';
 
 // Poster images are loaded once (boot) and reused when the room rebuilds on resize.
 export const posterArt = { images: [] };
 export async function loadPosters() {
-  posterArt.images = await Promise.all(['poster-1', 'poster-2'].map((n) => loadArt(n)));
+  posterArt.images = await Promise.all(['terminator-2-1991.jpg', 'jurassic-park-1993.jpg'].map((n) => loadImage(`/assets/posters/${n}`)));
 }
 
 const wallCache = new Map();
@@ -163,14 +164,8 @@ export function buildRoom(aspect) {
     if (!img) return;
     const ph = 0.56;
     const pw = ph * (img.width / img.height);
-    const sheet = laserPoster(img, 1024);
-    const mat = createHoloMaterial({
-      map: colorTex(sheet.map), roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.03,
-      holo: {
-        mask: dataTex(sheet.mask), prism: 1, pattern: i ? 'concentric' : 'starburst', patternScale: i ? 60 : 90,
-        tiltGain: [2.0, 1.2], inkOver: 0.9, prismRough: 0.12,
-        sparkle: 1, sparkleScale: 200, sparkleTilt: 1.3, glint: 6, aspect: pw / ph, glow: 0.02,
-      },
+    const mat = new THREE.MeshPhysicalMaterial({
+      map: colorTex(scan(img)), roughness: 0.68, clearcoat: 0.1, clearcoatRoughness: 0.4,
     });
     const poster = new THREE.Group();
     const face = new THREE.Mesh(new THREE.PlaneGeometry(pw, ph), mat);
