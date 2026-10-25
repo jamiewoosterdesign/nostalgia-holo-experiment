@@ -1,0 +1,170 @@
+:root {
+  --ink: #17142b;
+  --ink-soft: #4b4766;
+  --paper: rgba(255, 255, 255, 0.72);
+  --paper-solid: #fbfaff;
+  --line: rgba(23, 20, 43, 0.12);
+  --electric: #2f6bff;
+  --volt: #ff6a2b;
+  --violet: #7b4dff;
+  --mint: #18c7a0;
+  --font: "Instrument Sans", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #eef0f7;
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  touch-action: none;
+}
+body.hovering #stage { cursor: pointer; }
+body.dragging #stage { cursor: grabbing; }
+
+/* ---------- loader ---------- */
+#loader {
+  position: fixed; inset: 0;
+  display: grid; place-content: center; gap: 18px;
+  justify-items: center;
+  background: radial-gradient(120% 90% at 50% 40%, #ffffff 0%, #eceaf8 60%, #dfe6f5 100%);
+  z-index: 50;
+  transition: opacity 0.9s ease, visibility 0.9s;
+}
+#loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-mark {
+  font-weight: 700; letter-spacing: 0.28em; font-size: 15px;
+  background: linear-gradient(90deg, #2f6bff, #7b4dff, #ff4fa0, #ff8a2b, #18c7a0, #2f6bff);
+  background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: foil 3s linear infinite;
+}
+@keyframes foil { to { background-position: 300% 0; } }
+.loader-bar { width: 220px; height: 2px; background: var(--line); overflow: hidden; border-radius: 2px; }
+.loader-bar span { display: block; height: 100%; width: 0; background: var(--ink); transition: width 0.3s; }
+.loader-msg { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); letter-spacing: 0.06em; }
+
+/* ---------- HUD ---------- */
+.hud { position: fixed; left: 0; right: 0; z-index: 10; pointer-events: none; }
+.hud > * { pointer-events: auto; }
+.hud-top {
+  top: 0; display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 22px 26px;
+}
+.wm-title {
+  font-weight: 700; font-size: 17px; letter-spacing: 0.3em;
+}
+.wm-title span {
+  background: linear-gradient(180deg, #2f6bff, #ff4fa0);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.wm-sub { margin-top: 6px; font-size: 12px; color: var(--ink-soft); letter-spacing: 0.02em; }
+
+.tracking { display: flex; gap: 8px; }
+.pill {
+  display: inline-flex; align-items: center; gap: 9px;
+  font: 500 12.5px var(--font); color: var(--ink);
+  padding: 9px 14px; border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s;
+}
+.pill:hover { transform: translateY(-1px); background: rgba(255,255,255,0.9); }
+.pill.icon { padding: 9px 12px; font-size: 14px; }
+.pill .dot { width: 8px; height: 8px; border-radius: 50%; background: #b8b5c9; }
+.pill.on .dot { background: var(--mint); box-shadow: 0 0 0 4px rgba(24,199,160,0.18); }
+.pill.wait .dot { background: var(--volt); animation: pulse 1s infinite; }
+.pill.lost .dot { background: var(--volt); }
+@keyframes pulse { 50% { opacity: 0.3; } }
+
+.hud-bottom {
+  bottom: 18px; text-align: center;
+  font-size: 12px; color: var(--ink-soft); letter-spacing: 0.02em;
+  transition: opacity 0.5s;
+}
+.hud-bottom.dim { opacity: 0; }
+
+/* ---------- panels ---------- */
+.panel {
+  position: fixed; z-index: 20;
+  background: var(--paper);
+  backdrop-filter: blur(18px) saturate(1.5);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 18px 50px -20px rgba(40, 30, 90, 0.35);
+  transition: opacity 0.35s, transform 0.35s;
+}
+.panel.hidden { opacity: 0; transform: translateY(8px); pointer-events: none; }
+
+#settings { top: 70px; right: 26px; width: 270px; padding: 16px 18px; }
+#settings h3 {
+  margin: 4px 0 10px; font: 600 10.5px var(--mono); letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+#settings h3:not(:first-child) { margin-top: 18px; }
+#settings label { display: block; font-size: 12.5px; margin-bottom: 10px; }
+#settings label output { float: right; font-family: var(--mono); font-size: 11px; color: var(--ink-soft); }
+#settings input[type="range"] { width: 100%; margin-top: 5px; accent-color: var(--violet); }
+#settings label.check { display: flex; gap: 8px; align-items: center; }
+#settings .fine { font-size: 11px; color: var(--ink-soft); line-height: 1.45; margin: 12px 0 0; }
+
+#cam-preview {
+  position: fixed; right: 26px; bottom: 26px; z-index: 15;
+  width: 200px; border-radius: 10px; border: 1px solid var(--line);
+  background: #000;
+}
+#cam-preview.hidden { display: none; }
+
+/* ---------- exhibit label ---------- */
+.label {
+  left: 26px; bottom: 26px; width: 340px; padding: 18px 20px 16px;
+}
+.label-no {
+  font: 600 10.5px var(--mono); letter-spacing: 0.16em; color: var(--ink-soft);
+}
+.label h2 {
+  margin: 6px 0 4px; font-size: 21px; font-weight: 700; letter-spacing: -0.01em;
+}
+.label-finish {
+  display: inline-block; font: 600 10.5px var(--mono); letter-spacing: 0.06em;
+  padding: 4px 8px; border-radius: 6px; margin: 4px 0 2px;
+  color: #fff;
+  background: linear-gradient(100deg, #2f6bff, #7b4dff 40%, #ff4fa0 70%, #ff8a2b);
+}
+.label p { font-size: 13px; line-height: 1.5; color: var(--ink-soft); margin: 10px 0 0; }
+.label-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.label-actions:empty { display: none; }
+.label-actions button {
+  font: 600 12px var(--font); padding: 8px 13px; border-radius: 9px;
+  border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer;
+}
+.label-actions button.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+.label-actions button:hover { transform: translateY(-1px); }
+.label-actions .label-tip { flex-basis: 100%; margin: 4px 0 0; font: 500 11px var(--mono); color: var(--ink-soft); opacity: 0.8; }
+.label-actions kbd {
+  font: 500 10px var(--mono); opacity: 0.55; margin-left: 4px;
+}
+
+@media (max-width: 640px) {
+  .wm-sub { display: none; }
+  .label { left: 12px; right: 12px; width: auto; bottom: 12px; }
+  .hud-top { padding: 14px 16px; }
+  #settings { right: 12px; left: 12px; width: auto; }
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Holo Archive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/ui/styles.css" />
+  </head>
+  <body>
+    <canvas id="stage"></canvas>
+
+    <div id="loader">
+      <div class="loader-mark">HOLO/ARCHIVE</div>
+      <div class="loader-bar"><span></span></div>
+      <div class="loader-msg">Printing foils…</div>
+    </div>
+
+    <header class="hud hud-top">
+      <div class="wordmark">
+        <div class="wm-title">HOLO<span>/</span>ARCHIVE</div>
+        <div class="wm-sub">Gallery 01 — Foil &amp; Light · a future museum of remembered collectibles</div>
+      </div>
+      <div class="tracking">
+        <button id="btn-track" class="pill">
+          <span class="dot"></span><span class="pill-label">Enable head tracking</span>
+        </button>
+        <button id="btn-settings" class="pill icon" title="Calibration &amp; quality">⚙</button>
+      </div>
+    </header>
+
+    <aside id="settings" class="panel hidden">
+      <h3>Calibration</h3>
+      <label>Parallax strength <output data-for="parallax"></output>
+        <input type="range" id="parallax" min="0.4" max="2.5" step="0.05" value="1.15" /></label>
+      <label>Screen height (cm) <output data-for="screenCm"></output>
+        <input type="range" id="screenCm" min="14" max="45" step="0.5" value="19.5" /></label>
+      <label>Webcam horizontal FOV (°) <output data-for="camFov"></output>
+        <input type="range" id="camFov" min="40" max="110" step="1" value="62" /></label>
+      <label>Smoothing <output data-for="smoothing"></output>
+        <input type="range" id="smoothing" min="0.2" max="3" step="0.05" value="1" /></label>
+      <h3>Quality</h3>
+      <label class="check"><input type="checkbox" id="q-reflect" checked /> Floor reflections</label>
+      <label class="check"><input type="checkbox" id="q-bloom" checked /> Bloom</label>
+      <label class="check"><input type="checkbox" id="q-dof" checked /> Depth of field on inspect</label>
+      <label class="check"><input type="checkbox" id="q-preview" /> Show camera preview</label>
+      <p class="fine">Tip: sit at your normal distance and centre your head; if the room feels too "swimmy", lower parallax. If depth feels flat, raise it.</p>
+    </aside>
+
+    <canvas id="cam-preview" class="hidden" width="240" height="180"></canvas>
+
+    <section id="label" class="panel label hidden">
+      <div class="label-no">EXHIBIT <span id="label-no">01</span></div>
+      <h2 id="label-title">—</h2>
+      <div class="label-finish" id="label-finish"></div>
+      <p id="label-desc"></p>
+      <div class="label-actions" id="label-actions"></div>
+    </section>
+
+    <footer class="hud hud-bottom" id="hint">
+      Move your head — or your mouse — to look into the gallery · Click an exhibit to inspect it
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
